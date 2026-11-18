@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blooming — 한 겹씩 쌓이는 감정 타임캡슐</title>
+  <meta name="description" content="언젠가 활짝 필 당신이, 아직 봉오리인 오늘을 미워하지 않도록. 힘든 날에 꺼내어 속마음을 묻어두는 온디바이스 감정 타임캡슐." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blooming — 한 겹씩 쌓이는 감정 타임캡슐" />
+  <meta property="og:description" content="매일 쓰지 않아도 괜찮아요. 힘든 날에 꺼내어 속마음을 한 줄씩 묻어두는 타임캡슐." />
+  <meta property="og:image" content="./images/og-cover.jpg" />
+  <link rel="icon" type="image/png" href="./images/icon.png" />
+  <style>
+    :root {
+      --bg: #FAF2EA;
+      --surface: #FFFFFF;
+      --surface-soft: #FDF7F2;
+      --text: #261E22;
+      --muted: #6C5C63;
+      --accent: #D67698;
+      --accent-soft: #FDF0F5;
+      --border: #EDE0D6;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #FCF6F0 0%, #F4E6DA 100%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+      line-height: 1.65;
+    }
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    header {
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .nav-brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(45, 30, 38, 0.12);
+    }
+    .nav-brand span {
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      font-size: 14px;
+    }
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover { color: var(--text); }
+
+    .hero {
+      text-align: center;
+      padding: 44px 0 36px;
+    }
+    .hero-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      box-shadow: 0 14px 32px rgba(60, 40, 48, 0.16);
+      margin-bottom: 22px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid #F2D2DE;
+      color: #9C4A66;
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    h1 {
+      margin: 0 auto 16px;
+      max-width: 680px;
+      font-size: clamp(26px, 4.4vw, 40px);
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      margin: 0 auto 28px;
+      max-width: 580px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 14.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-primary {
+      background: var(--text);
+      color: #FAF2EA;
+      box-shadow: 0 10px 24px rgba(38, 30, 34, 0.16);
+    }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    .section-title {
+      text-align: center;
+      font-size: 22px;
+      margin: 48px 0 8px;
+      letter-spacing: -0.01em;
+    }
+    .section-sub {
+      text-align: center;
+      font-size: 14.5px;
+      color: var(--muted);
+      margin: 0 0 26px;
+    }
+
+    .gallery {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 8px 4px 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .gallery::-webkit-scrollbar { height: 8px; }
+    .gallery::-webkit-scrollbar-thumb {
+      background: rgba(108, 92, 99, 0.25);
+      border-radius: 999px;
+    }
+    .shot-card {
+      flex: 0 0 230px;
+      scroll-snap-align: start;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: 0 12px 28px rgba(45, 30, 38, 0.08);
+    }
+    .shot-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 16px 0 48px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 20px;
+      box-shadow: 0 8px 20px rgba(45, 30, 38, 0.04);
+    }
+    .feature-card h3 {
+      margin: 0 0 8px;
+      font-size: 16.5px;
+    }
+    .feature-card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 44px;
+      font-size: 13.5px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    footer a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="nav-brand" href="./index.html">
+        <img src="./images/icon.png" alt="Blooming 앱 아이콘" />
+        <span>BLOOMING</span>
+      </a>
+      <nav>
+        <a href="#preview">화면 미리보기</a>
+        <a href="#features">핵심 기능</a>
+        <a href="./privacy-policy.html">개인정보처리방침</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <img class="hero-icon" src="./images/icon.png" alt="Blooming" />
+      <div><span class="pill">한 겹씩 쌓이는 감정 타임캡슐</span></div>
+      <h1>언젠가 활짝 필 당신이,<br />아직 봉오리인 오늘을 미워하지 않도록</h1>
+      <p>
+        취업 준비, 수험 생활, 기약 없는 기다림 속에서 매일 거창한 일기를 써야 한다는 부담 없이,
+        힘든 날에만 꺼내어 속마음을 한 줄씩 묻어두는 온디바이스 타임캡슐입니다.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#preview">앱 화면 둘러보기</a>
+        <a class="btn btn-secondary" href="./privacy-policy.html">개인정보처리방침</a>
+        <a class="btn btn-secondary" href="mailto:alswo6102@gmail.com">문의하기</a>
+      </div>
+    </section>
+
+    <section id="preview">
+      <h2 class="section-title">화면 미리보기</h2>
+      <p class="section-sub">좌우로 밀어 Blooming의 전체 흐름을 살펴보세요.</p>
+      <div class="gallery">
+        <div class="shot-card"><img src="./images/screenshot_1.jpg" alt="Blooming 감정 타임캡슐 메인" loading="lazy" /></div>
+        <div class="shot-card"><img src="./images/screenshot_2.jpg" alt="매일 쓰지 않아도 괜찮은 한 줄 기록" loading="lazy" /></div>
+        <div class="shot-card"><img src="./images/screenshot_3.jpg" alt="피우는 날까지 잠겨있는 비밀 봉인" loading="lazy" /></div>
+        <div class="shot-card"><img src="./images/screenshot_4.jpg" alt="시간만큼 자라는 꽃잎과 짙어진 빛" loading="lazy" /></div>
+        <div class="shot-card"><img src="./images/screenshot_5.jpg" alt="시간대별 하늘 색온도와 시 한 구절" loading="lazy" /></div>
+        <div class="shot-card"><img src="./images/screenshot_6.jpg" alt="3초간 꾹 눌러 꽃 피우기" loading="lazy" /></div>
+        <div class="shot-card"><img src="./images/screenshot_7.jpg" alt="만개와 함께 열리는 타임캡슐 카드" loading="lazy" /></div>
+        <div class="shot-card"><img src="./images/screenshot_8.jpg" alt="온디바이스 간직한 꽃 온실 아카이브" loading="lazy" /></div>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">Blooming이 다른 이유</h2>
+      <p class="section-sub">지친 날을 미워하지 않고 조용히 버텨낼 수 있도록 설계했습니다.</p>
+      <div class="features">
+        <article class="feature-card">
+          <h3>숙제 없는 한 줄 기록</h3>
+          <p>연속 출석 체크도, 강제 D-Day도 없습니다. 유독 버거운 날에만 꺼내어 가볍게 한 줄씩 남기면 꽃잎이 한 겹 자랍니다.</p>
+        </article>
+        <article class="feature-card">
+          <h3>피우는 날까지 비밀 봉인</h3>
+          <p>힘들 때 적은 글을 곧바로 다시 보며 지치지 않도록, 3초간 꾹 눌러 꽃을 피우기 전까지 문장을 조용히 덮어둡니다.</p>
+        </article>
+        <article class="feature-card">
+          <h3>시간과 함께 깊어지는 빛</h3>
+          <p>아무것도 못 적은 주에도 7일마다 기다림의 꽃잎이 피어나고, 20겹 이후에는 물드는 빛 · 짙어진 빛 · 단단한 빛으로 깊어집니다.</p>
+        </article>
+        <article class="feature-card">
+          <h3>오직 내 기기 안에만 보관</h3>
+          <p>회원가입이나 로그인 없이 바로 시작하며, 작성한 속마음 원문은 서버로 전송되지 않고 기기 내부에만 안전하게 저장됩니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2026 Awerage · Blooming</div>
+      <div>
+        <a href="./privacy-policy.html">개인정보처리방침</a> ·
+        <a href="mailto:alswo6102@gmail.com">alswo6102@gmail.com</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
